@@ -10,22 +10,8 @@ build: off  # будем использовать свой скрипт сбор
 
 install:
   - chmod +x ./gradlew
-  - chmod +x  ./artifacts/app-ibank_build-for-testers.jar
   # запускаем SUT (& означает, что в фоновом режиме - не блокируем терминал для запуска тестов)
   - java -jar ./artifacts/app-ibank_build-for-testers.jar &
 
 build_script:
   - ./gradlew test -Dselenide.headless=true --info
-
-
-notifications:
-  - provider: Email
-    # Список адресов
-    to:
-      - zybu@live.ru
-    # Отправлять ли письмо в случае успеха?
-    on_build_success: true
-    # Отправлять ли письмо в случае провала?
-    on_build_failure: false
-    # Отправлять ли письмо когда статус изменился?
-    on_build_status_changed: false
