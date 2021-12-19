@@ -1,9 +1,9 @@
 buildscript {
-    repositories {
-        maven {
-            url 'https://dl.bintray.com/alfa-laboratory/maven-releases/'
-        }
-    }
+//    repositories {
+//        maven {
+//            url 'https://dl.bintray.com/alfa-laboratory/maven-releases/'
+//        }
+//    }
 
     dependencies {
         classpath 'ru.alfalab.gradle:cucumber-parallel-test-gradle-plugin:0.3.2'
