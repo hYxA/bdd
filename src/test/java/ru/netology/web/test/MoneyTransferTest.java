@@ -13,7 +13,7 @@ public class MoneyTransferTest {
         var loginPage = new LoginPage();
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
-//        var verifyInfo = DataHelper.getVerificationCodeFor(authInfo);
-//        verificationPage.validVerify(verifyInfo);
+        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        verificationPage.validVerify(verificationCode);
     }
 }
