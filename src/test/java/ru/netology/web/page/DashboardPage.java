@@ -9,8 +9,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class DashboardPage {
-    private SelenideElement heading = $("[data-test-id=dashboard]");
-    private ElementsCollection cards = $$(".list__item");
+    private final SelenideElement heading = $("[data-test-id=dashboard]");
+    private final ElementsCollection cards = $$(".list__item");
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
 
@@ -20,8 +20,8 @@ public class DashboardPage {
     }
 
     // TODO: перебрать все карты по id и найти по атрибуту data-test-id
-    public int getFirstCardBalance() {
-        val text = cards.first().text();
+    public int getCardBalance(int cardIndex) {
+        val text = cards.get(cardIndex).text();
         return extractBalance(text);
     }
 
