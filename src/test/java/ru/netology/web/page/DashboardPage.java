@@ -19,7 +19,6 @@ public class DashboardPage {
         // убеждаемся, что перешли на третью страницу
     }
 
-    // TODO: перебрать все карты по id и найти по атрибуту data-test-id
     public int getCardBalance(int cardIndex) {
         val text = cards.get(cardIndex).text();
         return extractBalance(text);
