@@ -10,13 +10,17 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class MoneyTransferTest {
     @Test
-    void shouldTransferMoneyBetweenOwnCardsV1() {
+    void shouldTransferMoneyFromCard1ToCard2() {
+        int amount = 500;
+
         open("http://localhost:9999");
         var loginPage = new LoginPage();
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         verificationPage.validVerify(verificationCode);
+
+
     }
 
     @Test
