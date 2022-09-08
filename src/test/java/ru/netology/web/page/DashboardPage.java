@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class DashboardPage {
     private final SelenideElement heading = $("[data-test-id=dashboard]");
-//    private final SelenideElement amount = $("[data-test-id=amount]");
+    private final SelenideElement amount = $("[data-test-id=amount]");
     private final SelenideElement from = $("[data-test-id=from]");
     private final SelenideElement actionTransfer = $("[data-test-id=action-transfer]");
     private final ElementsCollection deposit = $$("[data-test-id=action-deposit]");
@@ -40,7 +40,9 @@ public class DashboardPage {
         if (cardIndex == 0) { cardFrom = 1; } else { cardFrom = 0; }
 
         deposit.get(cardIndex).click();
+        $("[data-test-id=amount]").click();
         $("[data-test-id=amount]").sendKeys("500");
+        from.click();
         from.sendKeys(DataHelper.getCardNumber(cardFrom));
         actionTransfer.click();
     }
