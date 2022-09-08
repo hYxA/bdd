@@ -9,19 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static com.codeborne.selenide.Selenide.open;
 
 public class MoneyTransferTest {
-    @Test
-    void shouldTransferMoneyFromCard1ToCard2() {
-        int amount = 500;
-
-        open("http://localhost:9999");
-        var loginPage = new LoginPage();
-        var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        verificationPage.validVerify(verificationCode);
-
-
-    }
 
     @Test
     void shouldGetBalanceOfCard1() {
@@ -56,4 +43,30 @@ public class MoneyTransferTest {
 
         assertEquals(expected, cardBalance);
     }
+
+    @Test
+    void shouldTransferMoneyFromCard1ToCard2() {
+        int amount = 500;
+        int cardIndex = 1;
+
+        open("http://localhost:9999");
+        var loginPage = new LoginPage();
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        verificationPage.validVerify(verificationCode);
+
+        var dashboardPage = new DashboardPage();
+        dashboardPage.topUpCardBalance(cardIndex, amount);
+
+        int expected1 = 10000 - amount;
+        int expected2 = 10000 + amount;
+
+        int actual1 = dashboardPage.getCardBalance(cardIndex);
+        int actual2 = dashboardPage.getCardBalance(1);
+
+        assertEquals(expected1, actual1);
+        assertEquals(expected2, actual2);
+    }
+
 }
