@@ -1,10 +1,13 @@
 package ru.netology.web.test;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.conditions.Visible;
 import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.DashboardPage;
 import ru.netology.web.page.LoginPage;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -67,6 +70,24 @@ public class MoneyTransferTest {
 
         assertEquals(expected1, actual1);
         assertEquals(expected2, actual2);
+    }
+
+    @Test
+    void shouldNotTransferMoneyFromCard1ToCard1() {
+        int amount = 500;
+        int cardIndex = 1;
+
+        open("http://localhost:9999");
+        var loginPage = new LoginPage();
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        verificationPage.validVerify(verificationCode);
+
+        var dashboardPage = new DashboardPage();
+        dashboardPage.topUpCardBalance(0, amount);
+
+        $("error-notification").shouldBe(Condition.visible);
     }
 
 }
