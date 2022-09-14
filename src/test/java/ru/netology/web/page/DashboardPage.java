@@ -11,9 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class DashboardPage {
     private final SelenideElement heading = $("[data-test-id=dashboard]");
-    private final SelenideElement actionTransfer = $("[data-test-id=action-transfer]");
-    private final SelenideElement amountTransfer = $$(".input__control").get(0);
-    private final SelenideElement from = $$(".input__control").get(1);
+
     private final ElementsCollection deposit = $$("[data-test-id=action-deposit]");
     private final ElementsCollection cards = $$(".list__item");
     private final String balanceStart = "баланс: ";
@@ -38,13 +36,8 @@ public class DashboardPage {
     }
 
     public void topUpCardBalance(int cardIndex, int amount) {
-        int cardFrom;
-        if (cardIndex == 0) {cardFrom = 1; } else {cardFrom = 0; }
+        deposit.get(cardIndex).click(); // Нажатие "Пополнить" у соответствующей карты
 
-        deposit.get(cardIndex).click();
-        amountTransfer.sendKeys(String.valueOf(amount));
-        from.sendKeys(DataHelper.getCardNumber(cardFrom));
-        actionTransfer.click();
     }
 
 
