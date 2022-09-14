@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.val;
-import ru.netology.web.data.DataHelper;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -16,8 +15,6 @@ public class DashboardPage {
     private final ElementsCollection cards = $$(".list__item");
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
-
-
 
     public DashboardPage() {
         heading.shouldBe(Condition.visible);
