@@ -19,11 +19,8 @@ public class MoneyTransferPage {
     }
 
     public void topUpCardBalance(int cardIndex, int amount) {
-        int cardFrom;
-        if (cardIndex == 0) {cardFrom = 1; } else {cardFrom = 0; }
-
         amountTransfer.sendKeys(String.valueOf(amount)); // Ввод суммы перевода
-        from.sendKeys(DataHelper.getCardNumber(cardFrom)); // Ввод номера карты, с которой произвести транзакцию
+        from.sendKeys(DataHelper.getOtherCardNumber(cardIndex)); // Ввод номера карты, с которой произвести транзакцию
         actionTransfer.click(); // Кнопка пополнить
     }
 
