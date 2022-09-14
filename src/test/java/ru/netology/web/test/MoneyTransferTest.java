@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.DashboardPage;
 import ru.netology.web.page.LoginPage;
+import ru.netology.web.page.MoneyTransferPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static com.codeborne.selenide.Selenide.open;
@@ -57,13 +58,21 @@ public class MoneyTransferTest {
         verificationPage.validVerify(verificationCode);
 
         var dashboardPage = new DashboardPage();
-        dashboardPage.topUpCardBalance(cardIndex, amount);
+        // Запомнить текщий баланс
+        int currentBalance[] = {
+                dashboardPage.getCardBalance(0),
+                dashboardPage.getCardBalance(1)
+        };
+        dashboardPage.topUpCardBalance(cardIndex);
 
-        int expected1 = 10000 - amount;
-        int expected2 = 10000 + amount;
+        var moneyTransferPage = new MoneyTransferPage();
+        moneyTransferPage.topUpCardBalance(cardIndex, amount);
 
-        int actual1 = dashboardPage.getCardBalance(cardIndex);
-        int actual2 = dashboardPage.getCardBalance(1);
+        int expected1 = currentBalance[0] - amount;
+        int expected2 = currentBalance[1] + amount;
+
+        int actual1 = dashboardPage.getCardBalance(0);
+        int actual2 = dashboardPage.getCardBalance(cardIndex);
 
         assertEquals(expected1, actual1);
         assertEquals(expected2, actual2);

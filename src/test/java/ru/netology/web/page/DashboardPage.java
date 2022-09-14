@@ -35,9 +35,8 @@ public class DashboardPage {
         return Integer.parseInt(value);
     }
 
-    public void topUpCardBalance(int cardIndex, int amount) {
+    public void topUpCardBalance(int cardIndex) {
         deposit.get(cardIndex).click(); // Нажатие "Пополнить" у соответствующей карты
-
     }
 
 
