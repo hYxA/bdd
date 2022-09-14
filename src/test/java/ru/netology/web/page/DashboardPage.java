@@ -11,13 +11,15 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class DashboardPage {
     private final SelenideElement heading = $("[data-test-id=dashboard]");
-    private final SelenideElement amount = $("[data-test-id=amount]");
-    private final SelenideElement from = $("[data-test-id=from]");
     private final SelenideElement actionTransfer = $("[data-test-id=action-transfer]");
+    private final SelenideElement amountTransfer = $$(".input__control").get(0);
+    private final SelenideElement from = $$(".input__control").get(1);
     private final ElementsCollection deposit = $$("[data-test-id=action-deposit]");
     private final ElementsCollection cards = $$(".list__item");
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
+
+
 
     public DashboardPage() {
         heading.shouldBe(Condition.visible);
@@ -37,12 +39,10 @@ public class DashboardPage {
 
     public void topUpCardBalance(int cardIndex, int amount) {
         int cardFrom;
-        if (cardIndex == 0) { cardFrom = 1; } else { cardFrom = 0; }
+        if (cardIndex == 0) {cardFrom = 1; } else {cardFrom = 0; }
 
         deposit.get(cardIndex).click();
-        $("[data-test-id=amount]").click();
-        $("[data-test-id=amount]").sendKeys("500");
-        from.click();
+        amountTransfer.sendKeys(String.valueOf(amount));
         from.sendKeys(DataHelper.getCardNumber(cardFrom));
         actionTransfer.click();
     }
