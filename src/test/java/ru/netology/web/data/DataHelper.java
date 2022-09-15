@@ -32,12 +32,24 @@ public class DataHelper {
         return cardNumber[index];
     }
 
-        @Value
-        public static class VerificationCode {
-            private String code;
+    public static String getOtherCardNumber(int index) {
+        int cardFrom;
+        if (index == 0) {
+            cardFrom = 1;
+        } else {
+            cardFrom = 0;
         }
-
-        public static VerificationCode getVerificationCodeFor (AuthInfo authInfo){
-            return new VerificationCode("12345");
-        }
+        String cardNumber[] = {"5559 0000 0000 0001",
+                "5559 0000 0000 0002"};
+        return cardNumber[cardFrom];
     }
+
+    @Value
+    public static class VerificationCode {
+        private String code;
+    }
+
+    public static VerificationCode getVerificationCodeFor(AuthInfo authInfo) {
+        return new VerificationCode("12345");
+    }
+}
