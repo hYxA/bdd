@@ -26,22 +26,12 @@ public class DataHelper {
         private String cardNumber;
     }
 
-    public static String getCardNumber(int index) {
-        String cardNumber[] = {"5559 0000 0000 0001",
-                "5559 0000 0000 0002"};
-        return cardNumber[index];
+    public static CardInfo getCard1Number() {
+        return new CardInfo("5559 0000 0000 0001");
     }
 
-    public static String getOtherCardNumber(int index) {
-        int cardFrom;
-        if (index == 0) {
-            cardFrom = 1;
-        } else {
-            cardFrom = 0;
-        }
-        String cardNumber[] = {"5559 0000 0000 0001",
-                "5559 0000 0000 0002"};
-        return cardNumber[cardFrom];
+    public static CardInfo getCard2Number() {
+        return new CardInfo("5559 0000 0000 0002");
     }
 
     @Value
