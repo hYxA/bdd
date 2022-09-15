@@ -18,9 +18,15 @@ public class MoneyTransferPage {
         amount.shouldBe(Condition.visible);
     }
 
-    public void topUpCardBalance(int cardIndex, int amount) {
+    public void topUpCard1Balance(int amount) {
         amountTransfer.sendKeys(String.valueOf(amount)); // Ввод суммы перевода
-        from.sendKeys(DataHelper.getOtherCardNumber(cardIndex)); // Ввод номера карты, с которой произвести транзакцию
+        from.sendKeys((CharSequence) DataHelper.getCard2Number()); // Ввод номера карты, с которой произвести транзакцию
+        actionTransfer.click(); // Кнопка пополнить
+    }
+
+    public void topUpCard2Balance(int amount) {
+        amountTransfer.sendKeys(String.valueOf(amount)); // Ввод суммы перевода
+        from.sendKeys((CharSequence) DataHelper.getCard1Number()); // Ввод номера карты, с которой произвести транзакцию
         actionTransfer.click(); // Кнопка пополнить
     }
 
