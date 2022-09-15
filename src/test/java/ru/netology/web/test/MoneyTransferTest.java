@@ -49,9 +49,8 @@ public class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferMoneyFromCard1ToCard2() {
-        int amount = 500;
-        int cardIndex = 1;
+    void shouldTransferMoneyToCard1FromCard2() {
+        int amount = 5000;
 
         open("http://localhost:9999");
         var loginPage = new LoginPage();
@@ -61,15 +60,46 @@ public class MoneyTransferTest {
         verificationPage.validVerify(verificationCode);
 
         var dashboardPage = new DashboardPage();
-        // Запомнить текщий баланс
+        // Запомнить текущий баланс
         int currentBalance[] = {
                 dashboardPage.getCardBalance(0),
                 dashboardPage.getCardBalance(1)
         };
-        dashboardPage.topUpCardBalance(cardIndex);
+        dashboardPage.topUpCard1Balance();
 
         var moneyTransferPage = new MoneyTransferPage();
         moneyTransferPage.topUpCard1Balance(amount);
+
+        int expected1 = currentBalance[0] + amount;
+        int expected2 = currentBalance[1] - amount;
+
+        int actual1 = dashboardPage.getCardBalance(0);
+        int actual2 = dashboardPage.getCardBalance(1);
+
+        assertEquals(expected1, actual1);
+        assertEquals(expected2, actual2);
+    }
+    @Test
+    void shouldTransferMoneyToCard2FromCard1() {
+        int amount = 5000;
+
+        open("http://localhost:9999");
+        var loginPage = new LoginPage();
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        verificationPage.validVerify(verificationCode);
+
+        var dashboardPage = new DashboardPage();
+        // Запомнить текущий баланс
+        int currentBalance[] = {
+                dashboardPage.getCardBalance(0),
+                dashboardPage.getCardBalance(1)
+        };
+        dashboardPage.topUpCard2Balance();
+
+        var moneyTransferPage = new MoneyTransferPage();
+        moneyTransferPage.topUpCard2Balance(amount);
 
         int expected1 = currentBalance[0] - amount;
         int expected2 = currentBalance[1] + amount;
@@ -81,43 +111,11 @@ public class MoneyTransferTest {
         assertEquals(expected2, actual2);
     }
 
-    @Test
-    void shouldTransferMoneyFromCard2ToCard1() {
-        int amount = 500;
-        int cardIndex = 2;
-
-        open("http://localhost:9999");
-        var loginPage = new LoginPage();
-        var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        verificationPage.validVerify(verificationCode);
-
-        var dashboardPage = new DashboardPage();
-        // Запомнить текщий баланс
-        int currentBalance[] = {
-                dashboardPage.getCardBalance(0),
-                dashboardPage.getCardBalance(1)
-        };
-        dashboardPage.topUpCardBalance(cardIndex);
-
-        var moneyTransferPage = new MoneyTransferPage();
-        moneyTransferPage.topUpCard2Balance(amount);
-
-        int expected1 = currentBalance[0] + amount;
-        int expected2 = currentBalance[1] - amount;
-
-        int actual1 = dashboardPage.getCardBalance(0);
-        int actual2 = dashboardPage.getCardBalance(1);
-
-        assertEquals(expected1, actual1);
-        assertEquals(expected2, actual2);
-    }
 
     @Test
     void shouldNotTransferMoneyFromCard1ToCard1() {
         int amount = 500;
-        int cardIndex = 1;
+        int cardIndex = 0;
 
         open("http://localhost:9999");
         var loginPage = new LoginPage();
@@ -127,7 +125,10 @@ public class MoneyTransferTest {
         verificationPage.validVerify(verificationCode);
 
         var dashboardPage = new DashboardPage();
-        dashboardPage.topUpCardBalance(0, amount);
+        dashboardPage.topUpCard1Balance();
+
+        var moneyTransferPage = new MoneyTransferPage();
+        moneyTransferPage.topUpCard1Balance(amount);
 
         $("error-notification").shouldBe(Condition.visible);
     }

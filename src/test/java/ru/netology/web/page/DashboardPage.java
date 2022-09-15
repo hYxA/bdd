@@ -10,8 +10,8 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class DashboardPage {
     private final SelenideElement heading = $("[data-test-id=dashboard]");
-
-    private final ElementsCollection deposit = $$("[data-test-id=action-deposit]");
+    private final ElementsCollection deposit1 = $$("[data-test-id=action-deposit]").first(1);
+    private final ElementsCollection deposit2 = $$("[data-test-id=action-deposit]").last(1);
     private final ElementsCollection cards = $$(".list__item");
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
@@ -32,8 +32,12 @@ public class DashboardPage {
         return Integer.parseInt(value);
     }
 
-    public void topUpCardBalance(int cardIndex) {
-        deposit.get(cardIndex).click(); // Нажатие "Пополнить" у соответствующей карты
+    public void topUpCard1Balance() {
+        deposit1.get(0).click(); // Нажатие "Пополнить" у соответствующей карты
+    }
+
+    public void topUpCard2Balance() {
+        deposit2.get(0).click(); // Нажатие "Пополнить" у соответствующей карты
     }
 
 
