@@ -11,43 +11,40 @@ import ru.netology.web.page.MoneyTransferPage;
 import static com.codeborne.selenide.Selenide.$;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class MoneyTransferTest {
-// TODO: придумать алгоритм для переменных ассёрта
 
-//    @Test
-//    void shouldGetBalanceOfCard1() {
-//        int expected = 10000;
-//
-//        open("http://localhost:9999");
-//        var loginPage = new LoginPage();
-//        var authInfo = DataHelper.getAuthInfo();
-//        var verificationPage = loginPage.validLogin(authInfo);
-//        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-//        verificationPage.validVerify(verificationCode);
-//
-//        var dashboardPage = new DashboardPage();
-//        int cardBalance = dashboardPage.getCardBalance(0);
-//
-//        assertEquals(expected, cardBalance);
-//    }
-//
-//    @Test
-//    void shouldGetBalanceOfCard2() {
-//        int expected = 10000;
-//
-//        open("http://localhost:9999");
-//        var loginPage = new LoginPage();
-//        var authInfo = DataHelper.getAuthInfo();
-//        var verificationPage = loginPage.validLogin(authInfo);
-//        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-//        verificationPage.validVerify(verificationCode);
-//
-//        var dashboardPage = new DashboardPage();
-//        int cardBalance = dashboardPage.getCardBalance(1);
-//
-//        assertEquals(expected, cardBalance);
-//    }
+    @Test
+    void shouldGetBalanceOfCard1() {
+
+        open("http://localhost:9999");
+        var loginPage = new LoginPage();
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        verificationPage.validVerify(verificationCode);
+
+        var dashboardPage = new DashboardPage();
+        int cardBalance = dashboardPage.getCardBalance(0);
+
+        assertNotNull(cardBalance);
+    }
+
+    @Test
+    void shouldGetBalanceOfCard2() {
+        open("http://localhost:9999");
+        var loginPage = new LoginPage();
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        verificationPage.validVerify(verificationCode);
+
+        var dashboardPage = new DashboardPage();
+        int cardBalance = dashboardPage.getCardBalance(1);
+
+        assertNotNull(cardBalance);
+    }
 
     @Test
     void shouldTransferMoneyToCard1FromCard2() {
