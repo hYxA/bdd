@@ -21,7 +21,7 @@ public class MoneyTransferTest {
         var loginPage = new LoginPage();
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        var verificationCode = DataHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode);
 
         var dashboardPage = new DashboardPage();
@@ -36,7 +36,7 @@ public class MoneyTransferTest {
         var loginPage = new LoginPage();
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        var verificationCode = DataHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode);
 
         var dashboardPage = new DashboardPage();
@@ -53,7 +53,7 @@ public class MoneyTransferTest {
         var loginPage = new LoginPage();
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        var verificationCode = DataHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode);
 
         var dashboardPage = new DashboardPage();
@@ -85,7 +85,7 @@ public class MoneyTransferTest {
         var loginPage = new LoginPage();
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        var verificationCode = DataHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode);
 
         var dashboardPage = new DashboardPage();
@@ -123,7 +123,7 @@ public class MoneyTransferTest {
         var loginPage = new LoginPage();
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        var verificationCode = DataHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode);
 
         var dashboardPage = new DashboardPage();

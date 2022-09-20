@@ -47,7 +47,7 @@ public class TemplateSteps {
 
     @И("пользователь вводит проверочный код 'из смс' {string}")
     public void setValidCode(DataHelper.AuthInfo authInfo) {
-        verificationPage = verificationPage.validVerify(DataHelper.getVerificationCodeFor(authInfo));
+        verificationPage = verificationPage.validVerify(DataHelper.getVerificationCode());
     }
 
     @Тогда("происходит успешная авторизация и пользователь попадает на страницу 'Личный кабинет'")

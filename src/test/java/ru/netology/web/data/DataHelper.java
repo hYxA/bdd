@@ -9,8 +9,8 @@ public class DataHelper {
 
     @Value
     public static class AuthInfo {
-        private String login;
-        private String password;
+        String login;
+        String password;
     }
 
     public static AuthInfo getAuthInfo() {
@@ -23,7 +23,7 @@ public class DataHelper {
 
     @Value
     public static class CardInfo {
-        private String cardNumber;
+        String cardNumber;
     }
 
     public static CardInfo getCard1Number() { return new CardInfo("5559 0000 0000 0001"); }
@@ -33,16 +33,18 @@ public class DataHelper {
     }
 
     public static int getIndexCardByNumber(String cardNumber) {
-        if (cardNumber == "5559 0000 0000 0001") return 0;
-        if (cardNumber == "5559 0000 0000 0002") return 1;
+        int i = 9;
+        if (cardNumber.equals("5559 0000 0000 0002")) {i = 1;}
+        if (cardNumber.equals("5559 0000 0000 0001")) {i = 0;}
+        return i;
     }
 
     @Value
     public static class VerificationCode {
-        private String code;
+        String code;
     }
 
-    public static VerificationCode getVerificationCodeFor(AuthInfo authInfo) {
+    public static VerificationCode getVerificationCode() {
         return new VerificationCode("12345");
     }
 }
