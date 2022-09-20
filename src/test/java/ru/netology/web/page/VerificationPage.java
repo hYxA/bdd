@@ -7,17 +7,22 @@ import ru.netology.web.data.DataHelper;
 import static com.codeborne.selenide.Selenide.$;
 
 public class VerificationPage {
-    private SelenideElement codeField = $("[data-test-id=code] input");
-    private SelenideElement verifyButton = $("[data-test-id=action-verify]");
+    private final SelenideElement codeField = $("[data-test-id=code] input");
+    private final SelenideElement verifyButton = $("[data-test-id=action-verify]");
 
     public VerificationPage() {
         codeField.shouldBe(Condition.visible);
         // убеждаемся, что перешли на страницу верификации
     }
 
-    public DashboardPage validVerify(DataHelper.VerificationCode verificationCode) {
+    public VerificationPage validVerify(DataHelper.VerificationCode verificationCode) {
         codeField.setValue(verificationCode.getCode());
         verifyButton.click();
-        return new DashboardPage();
+        return new VerificationPage();
+    }
+
+    public void VerifyCodeIsInvalid() {
+        codeField.setValue("123");
+        verifyButton.click();
     }
 }

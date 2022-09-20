@@ -1,7 +1,6 @@
 package ru.netology.web.test;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.conditions.Visible;
 import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.DashboardPage;
