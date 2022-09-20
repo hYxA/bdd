@@ -11,4 +11,11 @@ public class LoginPage {
         $("[data-test-id=action-login]").click();
         return new VerificationPage();
     }
+
+    public VerificationPage validLogin2(String login, String password) {
+        $("[data-test-id=login] input").setValue(login);
+        $("[data-test-id=password] input").setValue(password);
+        $("[data-test-id=action-login]").click();
+        return new VerificationPage();
+    }
 }

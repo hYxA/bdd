@@ -26,12 +26,15 @@ public class DataHelper {
         private String cardNumber;
     }
 
-    public static CardInfo getCard1Number() {
-        return new CardInfo("5559 0000 0000 0001");
-    }
+    public static CardInfo getCard1Number() { return new CardInfo("5559 0000 0000 0001"); }
 
     public static CardInfo getCard2Number() {
         return new CardInfo("5559 0000 0000 0002");
+    }
+
+    public static int getIndexCardByNumber(String cardNumber) {
+        if (cardNumber == "5559 0000 0000 0001") return 0;
+        if (cardNumber == "5559 0000 0000 0002") return 1;
     }
 
     @Value
