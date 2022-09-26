@@ -13,8 +13,6 @@ public class DashboardPage {
     private final ElementsCollection deposit1 = $$("[data-test-id=action-deposit]").first(1);
     private final ElementsCollection deposit2 = $$("[data-test-id=action-deposit]").last(1);
     private final ElementsCollection cards = $$(".list__item");
-    private final String balanceStart = "баланс: ";
-    private final String balanceFinish = " р.";
 
     public DashboardPage() {
         heading.shouldBe(Condition.visible);
@@ -26,6 +24,9 @@ public class DashboardPage {
         return extractBalance(text);
     }
     private int extractBalance(String text) {
+        String balanceStart = "баланс: ";
+        String balanceFinish = " р.";
+
         val start = text.indexOf(balanceStart);
         val finish = text.indexOf(balanceFinish);
         val value = text.substring(start + balanceStart.length(), finish);
