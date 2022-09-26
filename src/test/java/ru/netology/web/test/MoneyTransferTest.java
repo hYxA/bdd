@@ -1,7 +1,6 @@
 package ru.netology.web.test;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.conditions.Visible;
 import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.DashboardPage;
@@ -66,7 +65,7 @@ public class MoneyTransferTest {
         dashboardPage.topUpCard1Balance();
 
         var moneyTransferPage = new MoneyTransferPage();
-        moneyTransferPage.topUpCard1Balance(amount);
+        moneyTransferPage.topUpCardBalance(amount, 1); // 1 - индекс второй карты
 
         int expected1 = currentBalance[0] + amount;
         int expected2 = currentBalance[1] - amount;
@@ -98,7 +97,7 @@ public class MoneyTransferTest {
         dashboardPage.topUpCard2Balance();
 
         var moneyTransferPage = new MoneyTransferPage();
-        moneyTransferPage.topUpCard2Balance(amount);
+        moneyTransferPage.topUpCardBalance(amount, 0); // 0 - индекс первой карты
 
         int expected1 = currentBalance[0] - amount;
         int expected2 = currentBalance[1] + amount;
@@ -112,11 +111,6 @@ public class MoneyTransferTest {
 
 
     @Test
-    /**
-     * Этот тест не будет проходить из-за бага, описанного в issue #4
-     * "Нет уведомления об ошибке перевода на ту же карту"
-     * Для прохождения теста в appveyor закомментирована строка 140 и прописана 139 строка
-     **/
     void shouldNotTransferMoneyFromCard1ToCard1() {
         int amount = 500;
 
@@ -132,10 +126,9 @@ public class MoneyTransferTest {
 
         // Подмена данных из другого метода
         var moneyTransferPage = new MoneyTransferPage();
-        moneyTransferPage.topUpCard2Balance(amount);
+        moneyTransferPage.topUpCardBalance(amount, 0);
 
-        $("error-notification").shouldBe(Condition.hidden); // Подмена для appveyor
-//        $("error-notification").shouldBe(Condition.visible);
+        $("error-notification").shouldBe(Condition.visible);
     }
 
 }
