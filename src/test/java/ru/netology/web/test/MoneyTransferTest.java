@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class MoneyTransferTest {
 
     @Test
-    void shouldGetBalanceOfCard1() {
+    void shouldGetBalanceOfCards() {
 
         open("http://localhost:9999");
         var loginPage = new LoginPage();
@@ -25,24 +25,11 @@ public class MoneyTransferTest {
         verificationPage.validVerify(verificationCode);
 
         var dashboardPage = new DashboardPage();
-        int cardBalance = dashboardPage.getCardBalance(0);
+        int cardBalance1 = dashboardPage.getCardBalance(0);
+        int cardBalance2 = dashboardPage.getCardBalance(1);
 
-        assertNotNull(cardBalance);
-    }
-
-    @Test
-    void shouldGetBalanceOfCard2() {
-        open("http://localhost:9999");
-        var loginPage = new LoginPage();
-        var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        verificationPage.validVerify(verificationCode);
-
-        var dashboardPage = new DashboardPage();
-        int cardBalance = dashboardPage.getCardBalance(1);
-
-        assertNotNull(cardBalance);
+        assertNotNull(cardBalance1);
+        assertNotNull(cardBalance2);
     }
 
     @Test
