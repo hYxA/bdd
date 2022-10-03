@@ -111,7 +111,6 @@ public class MoneyTransferTest {
         var dashboardPage = new DashboardPage();
         dashboardPage.topUpCard1Balance();
 
-        // Подмена данных из другого метода
         var moneyTransferPage = new MoneyTransferPage();
         moneyTransferPage.setAmount(amount);
         moneyTransferPage.setCardFrom(DataHelper.getCardNumber(0));
