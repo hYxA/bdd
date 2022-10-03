@@ -113,9 +113,9 @@ public class MoneyTransferTest {
 
         // Подмена данных из другого метода
         var moneyTransferPage = new MoneyTransferPage();
-        moneyTransferPage.topUpCardBalance(amount, 0);
-
-        $("error-notification").shouldBe(Condition.visible);
+        moneyTransferPage.setAmount(amount);
+        moneyTransferPage.setCardFrom(DataHelper.getCardNumber(0));
+        moneyTransferPage.errorTransfer();
     }
 
 }
